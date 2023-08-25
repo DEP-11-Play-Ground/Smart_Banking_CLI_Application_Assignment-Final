@@ -107,11 +107,12 @@ public static String addAccount(int[] AccountNo, String screen,
           boolean valid = true;
 
    loopadd:      do{
+              valid = true;
 
            System.out.printf("\tNew Account id: SDB-%05d\n",AccountNo[0]);
            id = String.format("SDB-%05d",AccountNo[0]);
 
-   loopvalidation:  do{  System.out.print("\tEnter Customer Name: ");
+   loopvalidation:  do{  System.out.print("\tEnter Customer Name : ");
            name = SCANNER.nextLine().strip();
            if (name.isBlank()){
            System.out.printf(ERROR_MSG, "Customer name can't be empty");
@@ -145,26 +146,44 @@ public static String addAccount(int[] AccountNo, String screen,
               System.out.print("\n\tDo you want to try again? (Y/n)");
               if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                   continue;
-                //continue mainLoop;
               }else{screen = DASHBOARD; break loopadd;} }
 
 
            String[][] newBankDetails = new String[BankDetails.length+1][3];
 
            for (int i = 0; i < BankDetails.length; i++) {
-           newBankDetails[i] = BankDetails[i];
+                for (int k = 0; k < 3; k++) {
+           newBankDetails[i][k] = BankDetails[i][k];
            }
 
+           }
+
+       
            newBankDetails[newBankDetails.length - 1][0] = id;
            newBankDetails[newBankDetails.length - 1][1] = name;
            newBankDetails[newBankDetails.length - 1][2] = Double.toString(initialDeposit);
 
            BankDetails = newBankDetails;
 
+System.out.println("Check,,,,");
+System.out.println();
+
+
+           for (int i = 0; i < newBankDetails.length; i++) {
+            Arrays.toString(BankDetails[i]);
+           }
+
+
+
 
            System.out.println();
            System.out.printf(SUCCESS_MSG,
-           String.format("%s:%s has been saved successfully", id, name)); AccountNo[0]++;
+           String.format("%s:%s has been saved successfully\n", id, name)); AccountNo[0]++;
+           
+           for (int i = 0; i < newBankDetails.length; i++) {
+            Arrays.toString(BankDetails[i]);
+           }
+
            System.out.print("\tDo you want to continue adding (Y/n)? ");
           if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
                  valid = false;
