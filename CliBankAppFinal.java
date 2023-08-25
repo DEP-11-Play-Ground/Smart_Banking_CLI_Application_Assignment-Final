@@ -28,29 +28,6 @@ class CliBankAppFinal {
 
     String screen = DASHBOARD;
 
-    //Ini check
-         BankDetails[0][0] = "SDB-00001";
-          BankDetails[0][1] = "Kasun";
-          BankDetails[0][2] = "7500.00";
-
-          BankDetails[1][0] = "SDB-00002";
-          BankDetails[1][1] = "Nuwan";
-          BankDetails[1][2] = "12500.00";
-
-          BankDetails[2][0] = "SDB-00003";
-          BankDetails[2][1] = "Pasan";
-          BankDetails[2][2] = "9000.00";
-
-          BankDetails[3][0] = "SDB-00004";
-          BankDetails[3][1] = "Kamal";
-          BankDetails[3][2] = "15000.00";
-
-          BankDetails[4][0] = "SDB-00005";
-          BankDetails[4][1] = "Sunil";
-          BankDetails[4][2] = "10000.00";
-
-          //Check is over
-
           do {
       final String APP_TITLE = String.format("%s%s%s",
           COLOR_BLUE_BOLD, screen, RESET);
@@ -115,13 +92,6 @@ class CliBankAppFinal {
     } while (true);
 
   }
-
-
-
-
-
-
-
 
 
 
@@ -192,11 +162,6 @@ public static String addAccount(int[] AccountNo, String screen,
            BankDetails = newBankDetails;
 
 
-            //  for (int i = 0; i < BankDetails.length; i++) {
-            //   System.out.println(Arrays.toString(BankDetails[i]));
-            //  }
-               
-
            System.out.println();
            System.out.printf(SUCCESS_MSG,
            String.format("%s:%s has been saved successfully", id, name)); AccountNo[0]++;
@@ -227,7 +192,6 @@ public static String deposits(String screen,
     boolean valid = true;
     String id;
 
-          // ID Validation
     loopD:  do {
             valid = true;
             System.out.print("\tEnter the Account No: ");
@@ -408,7 +372,6 @@ public static String Transfer(String screen,
 
            boolean valid = true;
            String id;
-           int indexTra = 0;
            int customer = 0;
            Double transfer = 0.00;
            int[] cusId = new int[2]; 
@@ -443,7 +406,6 @@ public static String Transfer(String screen,
               if(valid){
               for (int i = 0; i < BankDetails.length; i++) {
                 if (BankDetails[i][0].equals(id)) {
-                  indexTra = i;
                   cusId[customer]=i;
                   exists = true;
                   break;
@@ -479,8 +441,6 @@ public static String Transfer(String screen,
           System.out.printf("\n\tFrom Account Balance: %.2f\n",Double.valueOf(BankDetails[cusId[0]][2]));
           System.out.printf("\tTo Account Balance: %.2f\n\n",Double.valueOf(BankDetails[cusId[1]][2]));
 
-      // System.out.printf("\tCurrent Balance : %.2f\n", 
-      //                Double.valueOf(BankDetails[indexTra][2]));
 
            System.out.print("\tEnter Transfer amount : ");
               transfer = SCANNER.nextDouble();
@@ -524,16 +484,10 @@ public static String Transfer(String screen,
 }
 
 
-
-
-
-
-
 public static String checkAccountBalance( String screen, 
                             String DASHBOARD, String CHECK_ACCOUNT_BALANCE, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
 
-  System.out.println("Check Acc Balance method");
 
     int indexAcc = 0;
     boolean valid;
@@ -578,9 +532,9 @@ public static String checkAccountBalance( String screen,
 
             if (!valid) {
               System.out.print("\n\tDo you want to try again? (Y/n)");
-              if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
-                screen = DASHBOARD;
-              }else{screen = CHECK_ACCOUNT_BALANCE ; continue;}
+              if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
+                continue;
+              }else{screen = DASHBOARD ; break loop1;}
             }
               System.out.println();
 
@@ -670,7 +624,6 @@ public static String DeleteAccount(String screen,
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
                 break loopDe;
-               /*  continue mainLoop;*/
               }else{screen = CHECK_ACCOUNT_BALANCE ; continue;}
             }
 
@@ -685,7 +638,6 @@ public static String DeleteAccount(String screen,
           
           
           newBankDetails = new String[BankDetails.length - 1][3];
-       //   newBankDetails = new String[BankDetails.length - 1][3];
 
           for (int i = 0; i < BankDetails.length; i++) {
             if (i < index3) {
@@ -700,7 +652,6 @@ public static String DeleteAccount(String screen,
           }
 
           BankDetails = newBankDetails;
-
 
           System.out.println();
           System.out.printf(SUCCESS_MSG,
@@ -732,17 +683,12 @@ public static String DeleteAccount(String screen,
 
 
 
-public static void exit(String CLEAR){
+      public static void exit(String CLEAR){
 
-  System.out.println("Exit customer method");
-        System.out.println(CLEAR);
-        System.exit(0);
+            System.out.println("Exit customer method");
+            System.out.println(CLEAR);
+            System.exit(0);
 
-}
-
-
-
-
-
+          }
 
 }
