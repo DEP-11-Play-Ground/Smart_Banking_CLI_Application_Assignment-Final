@@ -24,7 +24,7 @@ class CliBankAppFinal {
     final String SUCCESS_MSG = String.format("\t%s%s%s\n", COLOR_GREEN_BOLD, "%s", RESET);
 
     String[][] BankDetails = new String[5][3];
-    int Account = 1;
+    int[] AccountNo = {1};
 
     String screen = DASHBOARD;
 
@@ -73,32 +73,32 @@ class CliBankAppFinal {
 
           switch (option) {
             case 1:
-              screen = CREATE_ACCOUNT;
+              screen = addAccount(AccountNo, screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 2:
             //  screen = DEPOSITS;
-              deposits(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails) ;
+             screen = deposits(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails) ;
               break;
 
             case 3:
              // screen = WITHDRAWSLS;           
-              withdrawls(screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
+             screen = withdrawls(screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 4:
              // screen = TRANSFER;
-              Transfer(screen, DASHBOARD, TRANSFER, ERROR_MSG, SUCCESS_MSG, BankDetails);
+              screen = Transfer(screen, DASHBOARD, TRANSFER, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 5:
              // screen = CHECK_ACCOUNT_BALANCE;
-              checkAccountBalance(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails);
+              screen = checkAccountBalance(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 6:
              //screen = DELETE_ACCOUNT;
-             DeleteAccount(screen, DASHBOARD, DELETE_ACCOUNT, ERROR_MSG, SUCCESS_MSG, BankDetails);
+             screen = DeleteAccount(screen, DASHBOARD, DELETE_ACCOUNT, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 7:
@@ -116,7 +116,7 @@ class CliBankAppFinal {
 
 
 
-          // System.out.printf("\tNew Account id: SDB-%05d\n",Account);
+           System.out.printf("\tNew Account id: SDB-%05d\n",AccountNo[0]);
           // id = String.format("SDB-%05d",Account);
 
           // // Name Validation
@@ -190,44 +190,7 @@ class CliBankAppFinal {
 
 
 
-
-
-//-------------------------------------------------------------------------------------------------
-//=================================================================================================
-
-
-
-        case DEPOSITS:  
-              deposits(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails) ;
-         
-
-
-        case WITHDRAWSLS:
-              withdrawls(screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
-
-
-        case TRANSFER:
-              Transfer(screen, DASHBOARD, TRANSFER, ERROR_MSG, SUCCESS_MSG, BankDetails);
-
-        
-        case CHECK_ACCOUNT_BALANCE:
-              checkAccountBalance(screen, DASHBOARD, CHECK_ACCOUNT_BALANCE, ERROR_MSG, SUCCESS_MSG, BankDetails); 
-
-
-
-
-          ////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
        
-
-
-
-
-    case DELETE_ACCOUNT:
     
 
             
@@ -253,11 +216,116 @@ class CliBankAppFinal {
 
 
 
-public static void addAccount(){
+public static String addAccount(int[] AccountNo, String screen, 
+                            String DASHBOARD, String CREATE_ACCOUNT, String ERROR_MSG, 
+                               String SUCCESS_MSG, String [][]BankDetails){
 
   System.out.println("Add customer method");
+            
 
-}
+          String id = "";
+          String name = "";
+          Double initialDeposit = 0.00;
+          boolean valid = true;
+
+   loopadd:      do{
+
+           System.out.printf("\tNew Account id: SDB-%05d\n",AccountNo[0]);
+           id = String.format("SDB-%05d",AccountNo[0]);
+
+          // // Name Validation
+  
+
+           valid = true;
+
+   loopvalidation:  do{  System.out.print("\tEnter Customer Name: ");
+           name = SCANNER.nextLine().strip();
+           if (name.isBlank()){
+           System.out.printf(ERROR_MSG, "Customer name can't be empty");
+           valid = false;
+           break loopvalidation;
+           }
+
+           for (int i = 0; i < name.length(); i++) {
+           if (!(Character.isLetter(name.charAt(i)) ||
+           Character.isSpaceChar(name.charAt(i))) ) {
+           System.out.printf(ERROR_MSG, "Invalid name");
+           valid = false;
+           break loopvalidation;
+           }
+           }
+
+           
+          
+          // //Deposit Validation
+
+    
+           System.out.print("\tEnter Deposit value: ");
+           initialDeposit = SCANNER.nextDouble();
+           SCANNER.nextLine();
+          // // System.out.println(initialDeposit);
+
+           if ((initialDeposit<5000.00)){
+           System.out.printf(ERROR_MSG, "Insufficient Account");
+           valid = false;
+            break loopvalidation;
+           }
+           }while(!valid);
+
+           System.out.println("Check "+ valid);
+
+             if (!valid) {
+              System.out.print("\n\tDo you want to try again? (Y/n)");
+              if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
+                  continue;
+                //continue mainLoop;
+              }else{screen = DASHBOARD; break loopadd;} }
+
+
+           String[][] newBankDetails = new String[BankDetails.length+1][3];
+
+           for (int i = 0; i < BankDetails.length; i++) {
+           newBankDetails[i] = BankDetails[i];
+           }
+
+           newBankDetails[newBankDetails.length - 1][0] = id;
+           newBankDetails[newBankDetails.length - 1][1] = name;
+           newBankDetails[newBankDetails.length - 1][2] = Double.toString(initialDeposit);
+
+           BankDetails = newBankDetails;
+          // // System.out.println(BankDetails[0][2]);
+
+
+             for (int i = 0; i < BankDetails.length; i++) {
+              System.out.println(Arrays.toString(BankDetails[i]));
+             }
+               
+          // // System.out.println(Arrays.toString(BankDetails));
+          // // System.out.println(Arrays.toString(BankDetails));
+          // // System.out.println(BankDetails[0][0]);
+          // // System.out.println(BankDetails[0][1]);
+          // // System.out.println(BankDetails[0][2]);
+
+           System.out.println();
+           System.out.printf(SUCCESS_MSG,
+           String.format("%s:%s has been saved successfully", id, name)); AccountNo[0]++;
+           System.out.print("\tDo you want to continue adding (Y/n)? ");
+          if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
+                 valid = false;
+                 continue;
+
+              }else{ screen = DASHBOARD;
+                valid = true; break loopadd;
+                 /*     continue mainLoop; */
+                    }
+
+         }while(!valid);
+          
+         return screen;
+
+        
+
+     }
 
 
 
@@ -423,6 +491,7 @@ public static String withdrawls(String screen,
               System.out.print("\n\tDo you want to try again? (Y/n)");
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
+                break loopW;
                 //continue mainLoop;
               }else{screen = WITHDRAWSLS; continue;}
             }
@@ -691,7 +760,7 @@ public static String checkAccountBalance( String screen,
 
 
 
-public static void DeleteAccount(String screen, 
+public static String DeleteAccount(String screen, 
                             String DASHBOARD, String CHECK_ACCOUNT_BALANCE, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
 
@@ -801,6 +870,8 @@ public static void DeleteAccount(String screen,
           break loopDe;
           }
        } while (!valid);
+
+       return screen;
   
 
 }
