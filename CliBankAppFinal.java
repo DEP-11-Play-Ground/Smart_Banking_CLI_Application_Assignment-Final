@@ -51,7 +51,7 @@ class CliBankAppFinal {
 
           //Check is over
 
-    mainLoop: do {
+          do {
       final String APP_TITLE = String.format("%s%s%s",
           COLOR_BLUE_BOLD, screen, RESET);
 
@@ -72,137 +72,47 @@ class CliBankAppFinal {
           SCANNER.nextLine();
 
           switch (option) {
-            case 1:
-              screen = addAccount(AccountNo, screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
+            case 1: 
+              System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, CREATE_ACCOUNT, RESET);
+              screen = addAccount(AccountNo, screen, DASHBOARD, CREATE_ACCOUNT, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 2:
-            //  screen = DEPOSITS;
+             System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, DEPOSITS, RESET);
              screen = deposits(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails) ;
               break;
 
-            case 3:
-             // screen = WITHDRAWSLS;           
+            case 3:  
+            System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, WITHDRAWSLS, RESET);      
              screen = withdrawls(screen, DASHBOARD, WITHDRAWSLS, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 4:
-             // screen = TRANSFER;
+              System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, TRANSFER, RESET);
               screen = Transfer(screen, DASHBOARD, TRANSFER, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 5:
-             // screen = CHECK_ACCOUNT_BALANCE;
-              screen = checkAccountBalance(screen, DASHBOARD, DEPOSITS, ERROR_MSG, SUCCESS_MSG, BankDetails);
+              System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, CHECK_ACCOUNT_BALANCE, RESET);
+              screen = checkAccountBalance(screen, DASHBOARD, CHECK_ACCOUNT_BALANCE, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 6:
-             //screen = DELETE_ACCOUNT;
+             System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, DELETE_ACCOUNT, RESET);
              screen = DeleteAccount(screen, DASHBOARD, DELETE_ACCOUNT, ERROR_MSG, SUCCESS_MSG, BankDetails);
               break;
 
             case 7:
+             System.out.printf("\n\t%s%s%s\n\n",COLOR_BLUE_BOLD, CLEAR, RESET);
                exit(CLEAR);
             default:
               continue;
           }
           break;
 
-        case CREATE_ACCOUNT:
-          String id = "";
-          String name = "";
-          Double initialDeposit = 0.00;
-          boolean valid = true;
-
-
-
-           System.out.printf("\tNew Account id: SDB-%05d\n",AccountNo[0]);
-          // id = String.format("SDB-%05d",Account);
-
-          // // Name Validation
-          // do{
-
-          // valid = true;
-          // System.out.print("\tEnter Customer Name: ");
-          // name = SCANNER.nextLine().strip();
-          // if (name.isBlank()){
-          // System.out.printf(ERROR_MSG, "Customer name can't be empty");
-          // valid = false;
-          // continue;
-          // }
-
-          // for (int i = 0; i < name.length(); i++) {
-          // if (!(Character.isLetter(name.charAt(i)) ||
-          // Character.isSpaceChar(name.charAt(i))) ) {
-          // System.out.printf(ERROR_MSG, "Invalid name");
-          // valid = false;
-          // break;
-          // }
-          // }
-          // }while(!valid);
-
-          // //Deposit Validation
-
-          // do{
-
-          // valid = true;
-          // System.out.print("\tEnter Deposit value: ");
-          // initialDeposit = SCANNER.nextDouble();
-          // SCANNER.nextLine();
-          // // System.out.println(initialDeposit);
-
-          // if ((initialDeposit<5000.00)){
-          // System.out.printf(ERROR_MSG, "Insufficient Account");
-          // valid = false;
-          // }
-          // }while(!valid);
-           String[][] newBankDetails = new String[BankDetails.length+1][3];
-
-          // for (int i = 0; i < BankDetails.length; i++) {
-          // newBankDetails[i] = BankDetails[i];
-          // }
-
-          // newBankDetails[newBankDetails.length - 1][0] = id;
-          // newBankDetails[newBankDetails.length - 1][1] = name;
-          // newBankDetails[newBankDetails.length - 1][2] =
-          // Double.toString(initialDeposit);
-
-          // BankDetails = newBankDetails;
-          // // System.out.println(BankDetails[0][2]);
-
-          // // System.out.println(Arrays.toString(BankDetails));
-          // // System.out.println(Arrays.toString(BankDetails));
-          // // System.out.println(Arrays.toString(BankDetails));
-          // // System.out.println(BankDetails[0][0]);
-          // // System.out.println(BankDetails[0][1]);
-          // // System.out.println(BankDetails[0][2]);
-
-          // System.out.println();
-          // System.out.printf(SUCCESS_MSG,
-          // String.format("%s:%s has been saved successfully", id, name)); Account++;
-          // System.out.print("\tDo you want to continue adding (Y/n)? ");
-          // if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
-          // screen = DASHBOARD;
-          // break;
-
-
-
-
-
-
-       
-    
-
-            
-       
       }
 
-
-
     } while (true);
-
-
-
 
   }
 
@@ -210,7 +120,7 @@ class CliBankAppFinal {
 
 
 
-  // ................>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 
@@ -218,10 +128,8 @@ class CliBankAppFinal {
 
 public static String addAccount(int[] AccountNo, String screen, 
                             String DASHBOARD, String CREATE_ACCOUNT, String ERROR_MSG, 
-                               String SUCCESS_MSG, String [][]BankDetails){
-
-  System.out.println("Add customer method");
-            
+                               String SUCCESS_MSG, String [][]BankDetails){     
+                                
 
           String id = "";
           String name = "";
@@ -232,11 +140,6 @@ public static String addAccount(int[] AccountNo, String screen,
 
            System.out.printf("\tNew Account id: SDB-%05d\n",AccountNo[0]);
            id = String.format("SDB-%05d",AccountNo[0]);
-
-          // // Name Validation
-  
-
-           valid = true;
 
    loopvalidation:  do{  System.out.print("\tEnter Customer Name: ");
            name = SCANNER.nextLine().strip();
@@ -252,27 +155,21 @@ public static String addAccount(int[] AccountNo, String screen,
            System.out.printf(ERROR_MSG, "Invalid name");
            valid = false;
            break loopvalidation;
+              }
            }
-           }
-
-           
-          
-          // //Deposit Validation
 
     
            System.out.print("\tEnter Deposit value: ");
            initialDeposit = SCANNER.nextDouble();
            SCANNER.nextLine();
-          // // System.out.println(initialDeposit);
 
            if ((initialDeposit<5000.00)){
            System.out.printf(ERROR_MSG, "Insufficient Account");
            valid = false;
             break loopvalidation;
-           }
+               }
            }while(!valid);
 
-           System.out.println("Check "+ valid);
 
              if (!valid) {
               System.out.print("\n\tDo you want to try again? (Y/n)");
@@ -293,18 +190,12 @@ public static String addAccount(int[] AccountNo, String screen,
            newBankDetails[newBankDetails.length - 1][2] = Double.toString(initialDeposit);
 
            BankDetails = newBankDetails;
-          // // System.out.println(BankDetails[0][2]);
 
 
-             for (int i = 0; i < BankDetails.length; i++) {
-              System.out.println(Arrays.toString(BankDetails[i]));
-             }
+            //  for (int i = 0; i < BankDetails.length; i++) {
+            //   System.out.println(Arrays.toString(BankDetails[i]));
+            //  }
                
-          // // System.out.println(Arrays.toString(BankDetails));
-          // // System.out.println(Arrays.toString(BankDetails));
-          // // System.out.println(BankDetails[0][0]);
-          // // System.out.println(BankDetails[0][1]);
-          // // System.out.println(BankDetails[0][2]);
 
            System.out.println();
            System.out.printf(SUCCESS_MSG,
@@ -316,14 +207,11 @@ public static String addAccount(int[] AccountNo, String screen,
 
               }else{ screen = DASHBOARD;
                 valid = true; break loopadd;
-                 /*     continue mainLoop; */
                     }
 
          }while(!valid);
           
-         return screen;
-
-        
+         return screen;      
 
      }
 
@@ -334,7 +222,6 @@ public static String deposits(String screen,
                             String DASHBOARD, String DEPOSITS, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
 
-  System.out.println("Add deposit method");
 
     int index1 = 0;
     boolean valid = true;
@@ -361,11 +248,8 @@ public static String deposits(String screen,
                 }
               }
               boolean exists = false;
-              System.out.println("for loop-");
-              System.out.println(BankDetails.length);
-              System.out.print(BankDetails[0][0]+", "+BankDetails[1][0]+", "+BankDetails[2][0]);
 
-           loop1 :   for (int i = 0; i < BankDetails.length; i++) {
+      loop1 :   for (int i = 0; i < BankDetails.length; i++) {
                 if (BankDetails[i][0].equals(id)) {
                   index1 = i;
                   exists = true;
@@ -379,14 +263,11 @@ public static String deposits(String screen,
             }
 
 
-            System.out.println("\n------------>\n"+valid);
-
        if (!valid) {
               System.out.print("\n\tDo you want to try again? (Y/n)");
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
                 break loopD;
-                //continue mainLoop;
               }else{screen = DEPOSITS; continue;}
             }
 
@@ -411,7 +292,7 @@ public static String deposits(String screen,
               System.out.printf("\tNew Account Balance: %.2f \n", Double.valueOf(BankDetails[index1][2]));
 
               System.out.printf(SUCCESS_MSG,
-                  String.format("%s has been done successfully", "Diposit"));
+                  String.format("%s has been done successfully\n", "Diposit"));
               System.out.print("\tDo you want to continue (Y/n)? ");
 
               if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
@@ -420,34 +301,18 @@ public static String deposits(String screen,
 
               }else{ screen = DASHBOARD;
                 valid = true; break loopD;
-                 /*     continue mainLoop; */
-                    }
-              //  continue;
-              //screen = DASHBOARD;
-            //  break;
 
-          //  }
+                    }
           } while (!valid);
-          System.out.println("final screen : "+ screen);
 
           return screen;
           
    }
 
 
-
-
-
-
-
-
-
-
 public static String withdrawls(String screen, 
                             String DASHBOARD, String WITHDRAWSLS, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
-
-  System.out.println("Add customer method");
 
    int index2 = 0;
    boolean valid = true;
@@ -456,12 +321,12 @@ public static String withdrawls(String screen,
           // ID Validation
       loopW:    do {
             valid = true;
-            System.out.print("\tEnter the Account Id (Withdraw): ");
+            System.out.print("\tEnter the Account Id : ");
             id = SCANNER.nextLine().toUpperCase().strip();
             if (id.isBlank()) {
               System.out.printf(ERROR_MSG, "ID can't be empty");
               valid = false;
-            } else if (!id.startsWith("SDB-") || id.length() < 8) {
+            } else if (!id.startsWith("SDB-") || id.length() < 9) {
               System.out.printf(ERROR_MSG, "Invalid ID format");
               valid = false;
             } else {
@@ -492,7 +357,6 @@ public static String withdrawls(String screen,
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
                 break loopW;
-                //continue mainLoop;
               }else{screen = WITHDRAWSLS; continue;}
             }
               System.out.println();
@@ -502,28 +366,26 @@ public static String withdrawls(String screen,
               System.out.print("\tWithdraw amount : ");
               Double withdraw = SCANNER.nextDouble();
               SCANNER.nextLine();
+             
+              Double check =(Double.valueOf(BankDetails[index2][2]) - withdraw);
 
-              if (!(withdraw > 100 || (Double.valueOf(BankDetails[index2][2]) - withdraw) > 500)) {
-                System.out.print("Insufficient Amount");
-                break;
+              if (withdraw < 100 || check < 500) {
+                System.out.print("\tInsufficient Amount\n");
               } else {
-                BankDetails[index2][2] = (Double.toString(Double.valueOf(BankDetails[index2][2]) - withdraw));
-              }
-
-              System.out.printf("\tNew Account Balance: %.2f\n\n", Double.valueOf(BankDetails[index2][2]));
+                BankDetails[index2][2] = (Double.toString(Double.valueOf(BankDetails[index2][2]) - withdraw));           
+                System.out.printf("\tNew Account Balance: %.2f\n\n", Double.valueOf(BankDetails[index2][2]));
 
                  System.out.printf(SUCCESS_MSG,
-                 String.format("%s has been done successfully\n", "Withdraw"));
-              System.out.print("\tDo you want to continue (Y/n)? ");
-              if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
-                 // continue;
+                 String.format("%s has been done successfully\n", "Withdraw"));}
+
+                System.out.print("\tDo you want to continue (Y/n)? ");
+                if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
                  valid = false;
                  continue;
 
               }else{ 
                 screen = DASHBOARD; 
                  valid = true;
-              //  continue mainLoop;
               break loopW;
               }
 
@@ -543,15 +405,13 @@ public static String Transfer(String screen,
                             String DASHBOARD, String TRANSFER, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
 
-  System.out.println("Add customer method");
 
-
-  boolean valid = true;
-  String id;
-    int indexTra = 0;
-          int customer = 0;
-          Double transfer = 0.00;
-          int[] cusId = new int[2]; 
+           boolean valid = true;
+           String id;
+           int indexTra = 0;
+           int customer = 0;
+           Double transfer = 0.00;
+           int[] cusId = new int[2]; 
 
      loopT:      do {
             valid = true;
@@ -566,7 +426,7 @@ public static String Transfer(String screen,
             if (id.isBlank()) {
               System.out.printf(ERROR_MSG, "ID can't be empty");
               valid = false;
-            } else if (!id.startsWith("SDB-") || id.length() < 8) {
+            } else if (!id.startsWith("SDB-") || id.length() < 9) {
               System.out.printf(ERROR_MSG, "Invalid ID format");
               valid = false;
             } else {
@@ -598,23 +458,25 @@ public static String Transfer(String screen,
           }
 
 
-
             if (!valid) {
               System.out.print("\n\tDo you want to try again? (Y/n)");
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
-                //continue mainLoop;
-              }else{screen = TRANSFER; continue;}
+                break loopT;
+              }else{
+                customer = 0;
+               continue; 
+                }
             }
 
-               System.out.printf("\tAccount Name: %s\n",BankDetails[customer][1]);
+               System.out.printf("\tAccount Name: %s\n",BankDetails[cusId[customer]][1]);
                System.out.println();
                customer++;
 
           }while(customer<2);
 
 
-          System.out.printf("\t\nFrom Account Balance: %.2f\n",Double.valueOf(BankDetails[cusId[0]][2]));
+          System.out.printf("\n\tFrom Account Balance: %.2f\n",Double.valueOf(BankDetails[cusId[0]][2]));
           System.out.printf("\tTo Account Balance: %.2f\n\n",Double.valueOf(BankDetails[cusId[1]][2]));
 
       // System.out.printf("\tCurrent Balance : %.2f\n", 
@@ -623,51 +485,42 @@ public static String Transfer(String screen,
            System.out.print("\tEnter Transfer amount : ");
               transfer = SCANNER.nextDouble();
               SCANNER.nextLine();
+             
+              Double checkBalance = (Double.valueOf(BankDetails[cusId[0]][2])-transfer);
 
-              if (!(transfer> 100 || (Double.valueOf(BankDetails[cusId[0]][2])-transfer) > 500)) {
-                System.out.print("Insufficient Amount");
-                break;
+              if (transfer < 100 || checkBalance < 500) {
+                System.out.print("\tInsufficient Amount\n");
               } else {
 
                 Double tax = 0.02 * transfer;
-                System.out.println("Tax = "+ tax);
-
                 BankDetails[cusId[0]][2] = 
                 (Double.toString(Double.valueOf(Double.valueOf(BankDetails[cusId[0]][2])- transfer - tax)));
 
                  BankDetails[cusId[1]][2] = 
                 (Double.toString(Double.valueOf(BankDetails[cusId[1]][2])+ transfer));
-              }
+             
 
 
               System.out.printf("\tNew From Account Balance: %.2f\n",Double.valueOf(BankDetails[cusId[0]][2]));
               System.out.printf("\tNew To Account Balance: %.2f\n", Double.valueOf(BankDetails[cusId[1]][2]));
 
 
-
-
-
-
                  System.out.printf(SUCCESS_MSG,
-                 String.format("%s has been Shown successfully\n", "Balance"));
+                 String.format("%s has been Shown successfully\n", "Balance")); }
               System.out.print("\tDo you want to continue (Y/n)? ");
               if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
-                 // continue;
-                  valid = false;
+                valid = false;
+                customer = 0;
                  continue;
-                 
-
+                
               }else{ screen = DASHBOARD; 
                 valid = true; 
                 break loopT;
-                //continue mainLoop;
               }
-
             
           } while (!valid);
 
       return screen;
-
 }
 
 
@@ -727,7 +580,6 @@ public static String checkAccountBalance( String screen,
               System.out.print("\n\tDo you want to try again? (Y/n)");
               if (!SCANNER.nextLine().strip().toUpperCase().equals("Y")) {
                 screen = DASHBOARD;
-               /*  continue mainLoop;*/
               }else{screen = CHECK_ACCOUNT_BALANCE ; continue;}
             }
               System.out.println();
@@ -747,7 +599,6 @@ public static String checkAccountBalance( String screen,
               }else{ screen = DASHBOARD;
                 valid = true; 
                 break loop1;
-                 /*     continue mainLoop; */
                     }
 
             
@@ -764,16 +615,18 @@ public static String DeleteAccount(String screen,
                             String DASHBOARD, String CHECK_ACCOUNT_BALANCE, String ERROR_MSG, 
                                String SUCCESS_MSG, String [][]BankDetails){
 
-  System.out.println("Delete customer method");
+
+
+
+             for (int i = 0; i < BankDetails.length; i++) {
+            System.out.println(Arrays.toString(BankDetails[i]));
+             }
 
 
               int index3 = 0;
               boolean valid = true;
               String id;
               String [][] newBankDetails;
-          // ID Validation
-
-     //     do{}while();
 
    loopDe:       do {
              valid = true;
@@ -849,7 +702,6 @@ public static String DeleteAccount(String screen,
           BankDetails = newBankDetails;
 
 
-
           System.out.println();
           System.out.printf(SUCCESS_MSG,
           String.format("%s has been deleted successfully", id));
@@ -858,10 +710,12 @@ public static String DeleteAccount(String screen,
           }
             
 
-          
+             for (int i = 0; i < BankDetails.length; i++) {
+            System.out.println(Arrays.toString(BankDetails[i]));
+             }
 
-
-          System.out.print("\tDo you want to continue adding (Y/n)? ");
+    
+          System.out.print("\tDo you want to continue deleting (Y/n)? ");
           if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
              continue;
           }else{
