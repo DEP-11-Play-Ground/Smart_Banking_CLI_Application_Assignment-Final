@@ -23,8 +23,9 @@ class CliBankAppFinal {
     final String ERROR_MSG = String.format("\t%s%s%s\n", COLOR_RED_BOLD, "%s", RESET);
     final String SUCCESS_MSG = String.format("\t%s%s%s\n", COLOR_GREEN_BOLD, "%s", RESET);
 
-    String[][] BankDetails = new String[5][3];
+    
     int[] AccountNo = {1};
+    String[][] BankDetails = new String[AccountNo[0]-1][3] ;
 
     String screen = DASHBOARD;
 
@@ -150,7 +151,7 @@ public static String addAccount(int[] AccountNo, String screen,
 
 
            String[][] newBankDetails = new String[BankDetails.length+1][3];
-
+           
            for (int i = 0; i < BankDetails.length; i++) {
                 for (int k = 0; k < 3; k++) {
            newBankDetails[i][k] = BankDetails[i][k];
@@ -163,9 +164,9 @@ public static String addAccount(int[] AccountNo, String screen,
            newBankDetails[newBankDetails.length - 1][1] = name;
            newBankDetails[newBankDetails.length - 1][2] = Double.toString(initialDeposit);
 
+
            BankDetails = newBankDetails;
 
-System.out.println("Check,,,,");
 System.out.println();
 
 
@@ -180,9 +181,6 @@ System.out.println();
            System.out.printf(SUCCESS_MSG,
            String.format("%s:%s has been saved successfully\n", id, name)); AccountNo[0]++;
            
-           for (int i = 0; i < newBankDetails.length; i++) {
-            Arrays.toString(BankDetails[i]);
-           }
 
            System.out.print("\tDo you want to continue adding (Y/n)? ");
           if (SCANNER.nextLine().strip().toUpperCase().equals("Y")){
